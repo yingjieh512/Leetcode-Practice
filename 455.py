@@ -1,16 +1,15 @@
 class Solution(object):
-    def findContentChildren(self, g, s):
+    def eraseOverlapIntervals(self, intervals):
         """
-        :type g: List[int]
-        :type s: List[int]
+        :type intervals: List[List[int]]
         :rtype: int
         """
-        g.sort()
-        s.sort()
-        child=0
-        cookies=0
-        while child<len(g) and cookies<len(s):
-            if g[child]<=s[cookies]:
-                child+=1
-            cookies+=1 
-        return child
+        sorted_Interval = sorted(intervals, key=lambda x: x[1])
+        count=0
+        prev=0
+        for i in range(1,len(sorted_Interval)):
+            if  sorted_Interval[i][0]<sorted_Interval[prev][1]:
+                count+=1
+            else:
+                prev=i
+        return count
